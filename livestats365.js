@@ -1,63 +1,85 @@
-const url = document.currentScript.src;
-const domain = url.substring(0, url.lastIndexOf("/")) + "/";
+
+const currentScript = document.currentScript;
+const url = currentScript ? currentScript.src : "";
+const domain = url ? url.substring(0, url.lastIndexOf("/") + 1) : "";
 window.applicationStartTime = Date.now();
+
+// DARK BACKGROUND
+const darkStyle = document.createElement("style");
+darkStyle.textContent = `
+  html, body {
+    background-color: #1a1a1a !important;
+    color: #ffffff;
+    margin: 0;
+    min-height: 100%;
+  }
+
+  #root, #app, #main, .App, .app {
+    background-color: #1a1a1a;
+  }
+
+  #powered-by {
+    display: none !important;
+  }
+`;
+(document.head || document.documentElement).appendChild(darkStyle);
 
 const elementPoweredBy = document.getElementById("powered-by");
 if (elementPoweredBy) {
   elementPoweredBy.style.display = "none";
 }
 
-var gtagHeadScript = document.createElement('script');
-gtagHeadScript.innerHTML = "(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':\n" +
-  "new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],\n" +
-  "j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=\n" +
-  "'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);\n" +
-  "})(window,document,'script','dataLayer','GTM-PWK3QWP');\n";
+// PREVENT ORDINARY EXTERNAL LINK NAVIGATION
+document.addEventListener("click", function (event) {
+  const link = event.target.closest("a[href]");
+  if (!link) return;
 
-document.head.appendChild(gtagHeadScript);
+  try {
+    const targetUrl = new URL(link.href, window.location.href);
 
-
-var gtagBodyScript = document.createElement('noscript');
-gtagBodyScript.innerHTML = "<iframe src=\"https://www.googletagmanager.com/ns.html?id=GTM-PWK3QWP\"\n" +
-  "height=\"0\" width=\"0\" style=\"display:none;visibility:hidden\"></iframe>";
-
-document.body.appendChild(gtagBodyScript);
-
-
-var fontElement = document.createElement('link');
-fontElement.setAttribute('rel', "stylesheet");
-fontElement.setAttribute('href', 'https://fonts.googleapis.com/css?family=Roboto:300,400,500');
-document.head.appendChild(fontElement);
-
-// const awsSdk = domain + 'third-party/aws-sdk-2.756.0.min.js';
-//
-// var awsSdkElement = document.createElement('script');
-// awsSdkElement.setAttribute('async', "");
-// awsSdkElement.setAttribute('src', awsSdk);
-// document.head.appendChild(awsSdkElement);
-
-fetch(domain + 'asset-manifest.json').then(res => res.json()).then(assets => {
-
-  const jsFiles = assets.entrypoints.filter(asset => asset.includes('static/js'));
-  const cssFiles = assets.entrypoints.filter(asset => asset.includes('static/css'));
-
-  if (jsFiles && (jsFiles.length > 0)) {
-    jsFiles.forEach(src => {
-      var element = document.createElement('script');
-
-      element.setAttribute('src', domain + src);
-      document.head.appendChild(element);
-    });
+    if (
+      /^https?:$/.test(targetUrl.protocol) &&
+      targetUrl.origin !== window.location.origin
+    ) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  } catch (error) {
+    // Ignore invalid URLs.
   }
+}, true);
 
-  if (cssFiles && (cssFiles.length > 0)) {
-    cssFiles.forEach(src => {
-      var element = document.createElement('link');
+// LOAD APPLICATION ASSETS
+if (domain) {
+  fetch(domain + "asset-manifest.json")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Could not load asset-manifest.json");
+      }
+      return response.json();
+    })
+    .then(assets => {
+      const entrypoints = assets.entrypoints || [];
 
-      element.setAttribute('href', domain + src);
-      element.setAttribute('rel', 'stylesheet');
+      entrypoints
+        .filter(asset => asset.endsWith(".css"))
+        .forEach(src => {
+          const link = document.createElement("link");
+          link.rel = "stylesheet";
+          link.href = new URL(src, domain).href;
+          document.head.appendChild(link);
+        });
 
-      document.head.appendChild(element);
+      entrypoints
+        .filter(asset => asset.endsWith(".js"))
+        .forEach(src => {
+          const script = document.createElement("script");
+          script.src = new URL(src, domain).href;
+          script.async = false;
+          document.head.appendChild(script);
+        });
+    })
+    .catch(error => {
+      console.error("Live stats application failed to load:", error);
     });
-  }
-});
+}
