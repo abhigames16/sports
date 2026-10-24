@@ -1,116 +1,63 @@
+const url = document.currentScript.src;
+const domain = url.substring(0, url.lastIndexOf("/")) + "/";
+window.applicationStartTime = Date.now();
 
-(() => {
-  "use strict";
+const elementPoweredBy = document.getElementById("powered-by");
+if (elementPoweredBy) {
+  elementPoweredBy.style.display = "none";
+}
 
-  const currentScript = document.currentScript;
-  if (!currentScript || !currentScript.src) return;
+var gtagHeadScript = document.createElement('script');
+gtagHeadScript.innerHTML = "(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':\n" +
+  "new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],\n" +
+  "j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=\n" +
+  "'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);\n" +
+  "})(window,document,'script','dataLayer','GTM-PWK3QWP');\n";
 
-  const domain = new URL("./", currentScript.src).href;
-  window.applicationStartTime = Date.now();
+document.head.appendChild(gtagHeadScript);
 
-  // DARK THEME
-  const darkStyle = document.createElement("style");
-  darkStyle.textContent = `
-    html,
-    body,
-    #root,
-    #app,
-    #powered-by {
-      background-color: #1a1a1a !important;
-      color: #ffffff !important;
-    }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-    }
+var gtagBodyScript = document.createElement('noscript');
+gtagBodyScript.innerHTML = "<iframe src=\"https://www.googletagmanager.com/ns.html?id=GTM-PWK3QWP\"\n" +
+  "height=\"0\" width=\"0\" style=\"display:none;visibility:hidden\"></iframe>";
 
-    #root,
-    #app {
-      width: 100%;
-      max-width: 100%;
-    }
+document.body.appendChild(gtagBodyScript);
 
-    .card,
-    .container,
-    .widget,
-    .panel,
-    .content,
-    .table,
-    .modal,
-    header,
-    main,
-    section {
-      background-color: #1a1a1a !important;
-      color: #ffffff !important;
-    }
 
-    p, span, label, h1, h2, h3, h4, h5, h6,
-    td, th, li {
-      color: inherit;
-    }
+var fontElement = document.createElement('link');
+fontElement.setAttribute('rel', "stylesheet");
+fontElement.setAttribute('href', 'https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+document.head.appendChild(fontElement);
 
-    a {
-      color: #8ab4f8;
-    }
+// const awsSdk = domain + 'third-party/aws-sdk-2.756.0.min.js';
+//
+// var awsSdkElement = document.createElement('script');
+// awsSdkElement.setAttribute('async', "");
+// awsSdkElement.setAttribute('src', awsSdk);
+// document.head.appendChild(awsSdkElement);
 
-    input, select, textarea, button {
-      background-color: #242424;
-      color: #ffffff;
-      border-color: #444444;
-    }
-  `;
-  document.head.appendChild(darkStyle);
+fetch(domain + 'asset-manifest.json').then(res => res.json()).then(assets => {
 
-  // Hide Powered By element if present
-  const poweredBy = document.getElementById("powered-by");
-  if (poweredBy) {
-    poweredBy.style.display = "none";
+  const jsFiles = assets.entrypoints.filter(asset => asset.includes('static/js'));
+  const cssFiles = assets.entrypoints.filter(asset => asset.includes('static/css'));
+
+  if (jsFiles && (jsFiles.length > 0)) {
+    jsFiles.forEach(src => {
+      var element = document.createElement('script');
+
+      element.setAttribute('src', domain + src);
+      document.head.appendChild(element);
+    });
   }
 
-  // Load Roboto font
-  const fontElement = document.createElement("link");
-  fontElement.rel = "stylesheet";
-  fontElement.href =
-    "https://fonts.googleapis.com/css?family=Roboto:300,400,500";
-  document.head.appendChild(fontElement);
+  if (cssFiles && (cssFiles.length > 0)) {
+    cssFiles.forEach(src => {
+      var element = document.createElement('link');
 
-  // Load the original application assets
-  fetch(domain + "asset-manifest.json")
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(
-          "Failed to load asset-manifest.json: " + response.status
-        );
-      }
-      return response.json();
-    })
-    .then(assets => {
-      const entrypoints = Array.isArray(assets.entrypoints)
-        ? assets.entrypoints
-        : [];
+      element.setAttribute('href', domain + src);
+      element.setAttribute('rel', 'stylesheet');
 
-      // Load CSS first
-      entrypoints
-        .filter(file => file.endsWith(".css"))
-        .forEach(file => {
-          const link = document.createElement("link");
-          link.rel = "stylesheet";
-          link.href = new URL(file, domain).href;
-          document.head.appendChild(link);
-        });
-
-      // Load application JavaScript
-      entrypoints
-        .filter(file => file.endsWith(".js"))
-        .forEach(file => {
-          const script = document.createElement("script");
-          script.src = new URL(file, domain).href;
-          script.async = false;
-          document.body.appendChild(script);
-        });
-    })
-    .catch(error => {
-      console.error("Live Stats application failed to load:", error);
+      document.head.appendChild(element);
     });
-})();
+  }
+});
