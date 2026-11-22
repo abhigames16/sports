@@ -1,6 +1,37 @@
 (function() {
 'use strict';
 
+   (function() {
+'use strict';
+
+/* =========================================
+   ALLOWED DOMAIN CHECK & REDIRECT (IVIDE PASTE CHEYYUKA)
+========================================= */
+(function() {
+  const ALLOWED_DOMAINS = [
+    'https://dfwrfsaq.blogspot.com',
+    'www.yourdomain.com'
+  ];
+  const REDIRECT_URL = 'https://yourblog.blogspot.com/p/access-denied.html';
+
+  const currentHost = (window.location.hostname || '').toLowerCase().replace(/^www\./, '');
+  const normalizedAllowed = ALLOWED_DOMAINS.map(d => d.toLowerCase().replace(/^www\./, ''));
+
+  if (!normalizedAllowed.includes(currentHost)) {
+    if (document.documentElement) {
+      document.documentElement.style.display = 'none';
+    }
+    window.location.replace(REDIRECT_URL);
+    throw new Error('Unauthorized domain access blocked');
+  }
+})();
+
+/* =========================================
+   INJECT CSS STYLES
+========================================= */
+const styles = `
+...
+
 /* =========================================
    INJECT CSS STYLES
 ========================================= */
