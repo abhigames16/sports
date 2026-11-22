@@ -1,23 +1,26 @@
 (function() {
 'use strict';
 
-   (function() {
-'use strict';
-
-/* =========================================
-   ALLOWED DOMAIN CHECK & REDIRECT (IVIDE PASTE CHEYYUKA)
+  /* =========================================
+   ALLOWED DOMAIN CHECK & REDIRECT
 ========================================= */
 (function() {
   const ALLOWED_DOMAINS = [
     'https://dfwrfsaq.blogspot.com',
-    'www.b4xsports.xyz'
+    'www.yourdomain.com',
+    'yourdomain.com'
   ];
-  const REDIRECT_URL = 'https://yourblog.blogspot.com/p/access-denied.html';
+
+  const REDIRECT_URL = 'https://yourblog.blogspot.com/p/access-denied.html'; // allenkil vere oru URL
 
   const currentHost = (window.location.hostname || '').toLowerCase().replace(/^www\./, '');
   const normalizedAllowed = ALLOWED_DOMAINS.map(d => d.toLowerCase().replace(/^www\./, ''));
 
-  if (!normalizedAllowed.includes(currentHost)) {
+  // Local testing-nu venamenkil 'localhost' / '127.0.0.1' koodi cherthaal mathi
+  const isAllowed = normalizedAllowed.includes(currentHost);
+
+  if (!isAllowed) {
+    // Page-il ulla content hide cheyyukayum redirect cheyyukayum cheyyunnu
     if (document.documentElement) {
       document.documentElement.style.display = 'none';
     }
