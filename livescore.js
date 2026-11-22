@@ -8,7 +8,8 @@
   const ALLOWED_DOMAINS = [
     'https://dfwrfsaq.blogspot.com',
     'www.b4xsports.xyz',
-    'yourdomain.com'
+    'b4xsports.xyz'
+    'https://www.b4xsports.xyz'
   ];
 
   const REDIRECT_URL = 'https://yourblog.blogspot.com/p/access-denied.html'; // allenkil vere oru URL
