@@ -7,7 +7,7 @@
 (function() {
   const ALLOWED_DOMAINS = [
     'https://dfwrfsaq.blogspot.com',
-    'www.yourdomain.com',
+    'www.b4xsports.xyz',
     'yourdomain.com'
   ];
 
