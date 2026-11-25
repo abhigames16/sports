@@ -1,37 +1,51 @@
 [
   {
-    "id": "4818654",
-    "link": "https://b4xsports.jkssbcares.in/2026/11/east-bengal-vs-al-hussein.html"
+    "id": "4282",
+    "link": "https://b4xsports.jkssbcares.in/2026/11/cfc-vs-tmfc.html",
+    "leftTeamName": "Malappuram FC",
+    "leftTeamLogo": "https://superleaguekerala.blr1.cdn.digitaloceanspaces.com/assets/clubImages/webp/Mallapuram.webp",
+    "rightTeamName": "Kannur FC",
+    "rightTeamLogo": "https://superleaguekerala.blr1.cdn.digitaloceanspaces.com/assets/clubImages/webp/Kannur.webp",
+    "timeText": "07:30 PM",
+    "dataStart": "2026-11-25T19:30:00.000+05:30",
+    "dataGameEnds": "2026-11-25T21:30:00.000+05:30",
+    "round": "Round 10",
+    "league": "Super League Kerala"
   },
 
 {
-    "id": "4865225",
-    "link": "https://b4xsports.jkssbcares.in/2026/11/northeast-united-vs-sc-delhi.html"
+    "id": "4828421",
+    "link": "https://b4xsports.jkssbcares.in/2026/11/sabah-vs-fc-barcelona.html"
   },
 
 
 
 {
-    "id": "4818330",
-    "link": "https://b4xsports.jkssbcares.in/2026/11/al-nassr-fc-riyadh-vs-al-sadd.html"
+    "id": "4828413",
+    "link": "https://b4xsports.jkssbcares.in/2026/11/sporting-cp-vs-manchester-united.html"
   },
 
 
   
 {
-    "id": "4828427",
-    "link": "https://b4xsports.jkssbcares.in/2026/11/real-madrid-vs-psv-eindhoven.html"
+    "id": "4828418",
+    "link": "https://b4xsports.jkssbcares.in/2026/11/psg-vs-as-roma.html"
   },
 
 {
-    "id": "4828426",
-    "link": "https://b4xsports.jkssbcares.in/2026/11/manchester-city-vs-napoli.html"
+    "id": "4828415",
+    "link": "https://b4xsports.jkssbcares.in/2026/11/club-brugge-vs-liverpool.html"
+  },
+
+{
+    "id": "4828416",
+    "link": "https://b4xsports.jkssbcares.in/2026/11/lille-vs-bayern-munich.html"
   },
 
 
   
   {
-    "id": "4828424",
-    "link": "https://b4xsports.jkssbcares.in/2026/11/arsenal-vs-borussia-dortmund.html"
+    "id": "4828414",
+    "link": "https://b4xsports.jkssbcares.in/2026/11/atletico-madrid-vs-viking.html"
   }
 ]
