@@ -1,51 +1,30 @@
 [
-  {
+  
+
+{
     "id": "4282",
-    "link": "https://www.zee5.com/sports/games/live-streaming/0-6-4z51083964/fkfc-vs-cfc/0-1-6z51084020",
-    "leftTeamName": "Calicut FC",
-    "leftTeamLogo": "https://superleaguekerala.blr1.cdn.digitaloceanspaces.com/assets/clubImages/webp/Calicut_dark.webp",
-    "rightTeamName": "Forca Kochi FC",
-    "rightTeamLogo": "https://superleaguekerala.blr1.cdn.digitaloceanspaces.com/assets/clubImages/webp/Kochi.webp",
+    "link": "https://b4xsports.jkssbcares.in/2026/11/tmfc-vs-tkfc.html",
+    "leftTeamName": "Thiruvananthapuram Kombans",
+    "leftTeamLogo": "https://superleaguekerala.blr1.cdn.digitaloceanspaces.com/assets/clubImages/webp/Kombans.webp",
+    "rightTeamName": "Thrissur Magic",
+    "rightTeamLogo": "https://superleaguekerala.blr1.cdn.digitaloceanspaces.com/assets/clubImages/webp/Thrissur.webp",
     "timeText": "07:30 PM",
-    "dataStart": "2026-11-26T19:30:00.000+05:30",
-    "dataGameEnds": "2026-11-26T22:00:00.000+05:30",
-    "round": "Round 10",
+    "dataStart": "2026-11-27T19:30:00.000+05:30",
+    "dataGameEnds": "2026-11-27T21:30:00.000+05:30",
+    "round": "Round 9",
     "league": "Super League Kerala"
   },
 
-{
-    "id": "4828421",
-    "link": "https://b4xsports.jkssbcares.in/2026/11/sabah-vs-fc-barcelona.html"
-  },
-
-
 
 {
-    "id": "4828413",
-    "link": "https://b4xsports.jkssbcares.in/2026/11/sporting-cp-vs-manchester-united.html"
-  },
-
-
-  
-{
-    "id": "4828418",
-    "link": "https://b4xsports.jkssbcares.in/2026/11/psg-vs-as-roma.html"
-  },
-
-{
-    "id": "4828415",
-    "link": "https://b4xsports.jkssbcares.in/2026/11/club-brugge-vs-liverpool.html"
-  },
-
-{
-    "id": "4828416",
-    "link": "https://b4xsports.jkssbcares.in/2026/11/lille-vs-bayern-munich.html"
+    "id": "4741983",
+    "link": "https://b4xsports.jkssbcares.in/2026/11/nottingham-forest-vs-chelsea.html"
   },
 
 
   
   {
-    "id": "4828414",
-    "link": "https://b4xsports.jkssbcares.in/2026/11/atletico-madrid-vs-viking.html"
+    "id": "4891715",
+    "link": "https://b4xsports.jkssbcares.in/2026/11/columbus-crew-vs-inter-miami.html"
   }
 ]
